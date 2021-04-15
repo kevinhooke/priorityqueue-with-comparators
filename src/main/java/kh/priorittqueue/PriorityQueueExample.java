@@ -24,10 +24,14 @@ public class PriorityQueueExample {
     
     public static void main(String[] args) {
         PriorityQueueExample example = new PriorityQueueExample();
-        example.doExample();
+        System.out.println("Example 1 with traditional Comparator");
+        example.example1();
+        
+        System.out.println("\nExample 1 with traditional Comparator");
+        example.exampleWithLambda();
     }
 
-    private void doExample() {
+    private void example1() {
         PriorityQueue<Event> queue = new PriorityQueue<>(
                 new Comparator<Event>() {
 
@@ -47,4 +51,19 @@ public class PriorityQueueExample {
         }
     }
 
+    private void exampleWithLambda() {
+        PriorityQueue<Event> queue = new PriorityQueue<>( ( o1,  o2 ) -> {
+                int result = o1.getEventType().compareTo(o2.getEventType()); 
+                return result;
+        });
+        queue.add(new Event("C"));
+        queue.add(new Event("A"));
+        queue.add(new Event("B"));    
+        
+        while(!queue.isEmpty()) {
+            System.out.println(queue.poll().getEventType());
+        }
+    }
+
+    
 }
